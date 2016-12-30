@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atwork.weibo.crawler.dao.UserDetailMapper">
+
+	<select id="findByFlag" resultType="UserDetail">
+		select id, uid, retried, flag from user_detail where flag = #{flag} limit ${common.user.detail.bulk};
+	</select>
+	<select id="findByUid" resultType="UserDetail">
+		select id from user_detail where uid = #{uid};
+	</select>
+	<insert id="save" parameterType="User">
+		insert IGNORE into user_detail(uid, nick_name, sex, create_date) values(#{uid}, #{nickName}, #{sex}, #{create});
+	</insert>
+	<update id="update" parameterType="UserDetail">
+		update user_detail set nick_name = #{nickName}, sex = #{sex}, birth = #{birth}, create_date = #{create}, address = #{address}, college = #{college}, memo = #{memo}, flag = true where uid = #{uid};
+	</update>
+	<update id="updateRetry" parameterType="UserDetail">
+		update user_detail set retried = #{retried}, flag = #{flag} where id = #{id}
+	</update>
+</mapper>

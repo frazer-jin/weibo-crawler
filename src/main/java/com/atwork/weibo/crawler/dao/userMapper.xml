@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atwork.weibo.crawler.dao.UserMapper">
+
+	<select id="findByFlag" resultType="User">
+		select id, uid, nick_name nickName, sex, flag from user where flag = #{flag} limit 1;
+	</select>
+	<select id="findByUid" resultType="User">
+		select id, uid, nick_name nickName, sex, flag from user where uid = #{uid};
+	</select>
+	<insert id="save" parameterType="User">
+		insert IGNORE into user(uid, nick_name, sex) values(#{uid}, #{nickName}, #{sex});
+	</insert>
+	<insert id="bulkSave" parameterType="User">
+		insert IGNORE into user(uid, nick_name, sex) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.uid}, #{item.nickName}, #{item.sex})
+		</foreach>
+	</insert>
+	<update id="update" parameterType="User">
+		update user set flag = #{flag} where id = #{id};
+	</update>
+</mapper>
