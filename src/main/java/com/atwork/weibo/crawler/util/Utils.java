@@ -57,7 +57,7 @@ public class Utils {
 		HtmlAnchor submit = page.getFirstByXPath("//*[@id=\"loginAction\"]");
 
 		usernameEl.setText(username);
-		passwordEl.setText(String.valueOf((int)Math.sqrt(Double.valueOf(password))));
+		passwordEl.setText(password);
 
 		page = submit.click();
 	}
