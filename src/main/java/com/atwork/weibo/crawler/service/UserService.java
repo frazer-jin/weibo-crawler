@@ -11,6 +11,8 @@ import com.atwork.weibo.crawler.dao.UserDetailMapper;
 import com.atwork.weibo.crawler.dao.UserMapper;
 import com.atwork.weibo.crawler.domain.User;
 import com.atwork.weibo.crawler.domain.UserDetail;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 
 @Service
 public class UserService {
@@ -57,5 +59,10 @@ public class UserService {
 			user.setFlag(true);
 		}
 		userDetailDao.updateRetry(user);
+	}
+	
+	@Transactional(readOnly=true)
+	public PageList<UserDetail> findUserDetailsByPage(PageBounds page){
+		return userDetailDao.findByPage(page);
 	}
 }

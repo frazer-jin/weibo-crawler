@@ -10,6 +10,9 @@
 	<select id="findByUid" resultType="UserDetail">
 		select id from user_detail where uid = #{uid};
 	</select>
+	<select id="findByPage" resultType="UserDetail">
+		select id, uid, retried, flag, nick_name nickName, sex, birth, create_date `create`, address, college, memo from user_detail
+	</select>
 	<insert id="save" parameterType="User">
 		insert IGNORE into user_detail(uid, nick_name, sex, create_date) values(#{uid}, #{nickName}, #{sex}, #{create});
 	</insert>

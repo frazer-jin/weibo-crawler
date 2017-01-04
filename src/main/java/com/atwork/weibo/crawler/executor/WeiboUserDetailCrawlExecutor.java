@@ -31,6 +31,8 @@ public class WeiboUserDetailCrawlExecutor implements InitializingBean, Disposabl
 	private String password;
 	@Value("${common.user.detail.bulk}")
 	private int thread;
+	@Value("${common.crawler.enable}")
+	private boolean enabled;
 
 	private ScheduledExecutorService scheduler = null;
 	private ExecutorService userDetailCrawler;
@@ -40,8 +42,10 @@ public class WeiboUserDetailCrawlExecutor implements InitializingBean, Disposabl
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		logger.info("start WeiboUserCrawlService scheduler...username {}, password {}", username, password);
-		startScheduleExecutor();
+		if(enabled){
+			logger.info("start WeiboUserCrawlService scheduler...username {}, password {}", username, password);
+			startScheduleExecutor();
+		}
 	}
 
 	@Override

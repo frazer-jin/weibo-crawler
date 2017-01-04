@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.atwork.weibo.crawler.domain.User;
 import com.atwork.weibo.crawler.domain.UserDetail;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 
 public interface UserDetailMapper {
 
@@ -12,4 +14,5 @@ public interface UserDetailMapper {
 	void save(User user);
 	void update(UserDetail userDetail);
 	void updateRetry(UserDetail user);
+	PageList<UserDetail> findByPage(PageBounds page);
 }

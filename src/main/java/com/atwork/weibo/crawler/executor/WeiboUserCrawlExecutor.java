@@ -28,6 +28,8 @@ public class WeiboUserCrawlExecutor implements InitializingBean, DisposableBean 
 	private String username;
 	@Value("${common.weibo.password}")
 	private String password;
+	@Value("${common.crawler.enable}")
+	private boolean enabled;
 
 	private ScheduledExecutorService scheduler = null;
 	
@@ -36,8 +38,10 @@ public class WeiboUserCrawlExecutor implements InitializingBean, DisposableBean 
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		logger.info("start WeiboUserCrawlService scheduler... username {}, password {}", username, password);
-		startScheduleExecutor();
+		if(enabled){
+			logger.info("start WeiboUserCrawlService scheduler... username {}, password {}", username, password);
+			startScheduleExecutor();
+		}
 	}
 
 	@Override
